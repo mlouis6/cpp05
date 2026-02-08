@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 13:02:24 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/08 14:15:21 by mlouis           ###   ########.fr       */
+/*   Created: 2026/02/08 15:29:07 by mlouis            #+#    #+#             */
+/*   Updated: 2026/02/08 15:32:46 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include <iostream>
+#ifndef FORM_HPP
+# define FORM_HPP
 
-int	main()
+# include <string>
+
+class Form
 {
-	Bureaucrat b;
-	std::cout << b << std::endl;
-	--b;
-	std::cout << b << std::endl;
-	++b;
-	std::cout << b << std::endl;
+	public:
+		Form(); //no signed
+		
+		Form(const Form& cpy);
+		Form&	operator=(const Form& cpy);
+		~Form();
 
-	std::cout << std::endl;
+	private:
+		const std::string	m_name;
+		bool				m_is_signed;
+		const int			m_grade_to_sign;
+		const int			m_grade_to_exec;
+};
 
-	Bureaucrat b2("Bob", 1);
-	std::cout << b2 << std::endl;
-	++b2;
-	std::cout << b2 << std::endl;
-	--b2;
-	std::cout << b2 << std::endl;
-
-	
-	
-	return (0);
-}
+#endif
