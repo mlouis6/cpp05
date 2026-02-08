@@ -15,23 +15,57 @@
 
 int	main()
 {
-	Bureaucrat b;
-	std::cout << b << std::endl;
-	--b;
-	std::cout << b << std::endl;
-	++b;
-	std::cout << b << std::endl;
+	try
+	{
+		Bureaucrat b;
+		std::cout << b << std::endl;
+		++b;
+		std::cout << b << std::endl;
+		--b;
+		std::cout << b << std::endl;
+		--b;
+		std::cout << b << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 	std::cout << std::endl;
 
-	Bureaucrat b2("Bob", 1);
-	std::cout << b2 << std::endl;
-	++b2;
-	std::cout << b2 << std::endl;
-	--b2;
-	std::cout << b2 << std::endl;
-
+	try
+	{
+		Bureaucrat b("Bob", 1);
+		std::cout << b << std::endl;
+		++b;
+		std::cout << b << std::endl;
+		--b;
+		std::cout << b << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "\n" << e.what() << std::endl;
+	}
 	
+	try
+	{
+		Bureaucrat b("Diane", 0);
+		std::cout << b << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "\n" << e.what() << std::endl;
+	}
+
+	try
+	{
+		Bureaucrat b("Quentin", 151);
+		std::cout << b << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "\n" << e.what() << std::endl;
+	}
 	
 	return (0);
 }

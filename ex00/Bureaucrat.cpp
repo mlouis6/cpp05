@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include <iostream>
+#include <ostream>
 
 Bureaucrat::Bureaucrat() : m_name("unnamed"), m_grade(150)
 {
@@ -20,24 +20,11 @@ Bureaucrat::Bureaucrat() : m_name("unnamed"), m_grade(150)
 
 Bureaucrat::Bureaucrat(const std::string& name, int	grade) : m_name(name)
 {
-	try
-	{
-		m_grade = grade;
-		if (m_grade < 1)
-			throw Bureaucrat::GradeTooLowException();
-		else if (m_grade > 150)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (Bureaucrat::GradeTooLowException e)
-	{
-		m_grade = 1;
-		std::cout << e.what();
-	}
-	catch (Bureaucrat::GradeTooHighException e)
-	{
-		m_grade = 150;
-		std::cout << e.what();
-	}
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+	m_grade = grade;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& cpy) : m_name(cpy.m_name), m_grade(cpy.m_grade)
@@ -45,11 +32,11 @@ Bureaucrat::Bureaucrat(const Bureaucrat& cpy) : m_name(cpy.m_name), m_grade(cpy.
 
 }
 
-Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& cpy)
-{
-	static_cast<void>(cpy);
-	return (*this);
-}
+// Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& cpy)
+// {
+// 	static_cast<void>(cpy);
+// 	return (*this);
+// }
 
 Bureaucrat::~Bureaucrat()
 {
@@ -68,33 +55,17 @@ int	Bureaucrat::getGrade() const
 
 Bureaucrat&	Bureaucrat::operator++()
 {
-	try
-	{
-		m_grade -= 1;
-		if (m_grade < 1)
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch (Bureaucrat::GradeTooLowException e)
-	{
-		m_grade = 1;
-		std::cout << e.what();
-	}
+	if (m_grade == 1)
+		throw Bureaucrat::GradeTooHighException();
+	m_grade -= 1;
 	return (*this);
 }
 
 Bureaucrat&	Bureaucrat::operator--()
 {
-	try
-	{
-		m_grade += 1;
-		if (m_grade > 150)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (Bureaucrat::GradeTooHighException e)
-	{
-		m_grade = 150;
-		std::cout << e.what();
-	}
+	if (m_grade == 150)
+		throw Bureaucrat::GradeTooLowException();
+	m_grade += 1;
 	return (*this);
 }
 
@@ -104,3 +75,12 @@ std::ostream&	operator<<(std::ostream& os, const Bureaucrat& b)
 	return (os);
 }
 
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}

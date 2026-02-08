@@ -15,6 +15,7 @@
 
 # include <string>
 # include <iosfwd>
+# include <exception>
 
 class Bureaucrat
 {
@@ -32,19 +33,12 @@ class Bureaucrat
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Grade too high\n");
-				}
-
+				virtual const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw()
-				{
-					return ("Grade too low\n");
-				}
+				virtual const char* what() const throw();
 		};
 
 	private:
