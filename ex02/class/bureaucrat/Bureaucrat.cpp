@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:03:22 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 13:36:59 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/10 15:05:27 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ void	Bureaucrat::signForm(AForm& form) const
 
 void	Bureaucrat::executeForm(const AForm& form) const
 {
+	if (!form.getIsSigned())
+	{
+		std::cout << m_name << " couldn't execute " << form.getName() << " because it isn't signed." << std::endl;
+		return ;
+	}
 	try
 	{
 		form.execute(*this);

@@ -6,11 +6,13 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:01:29 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 13:57:11 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/10 15:30:13 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include <iostream>
+#include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request Form", 72, 45, "none")
 {
@@ -35,9 +37,11 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void	RobotomyRequestForm::execute(const Bureaucrat& executor) const
 {
-	if (this->getGradeToExec() < executor.getGrade())
-	{
-		throw AForm::GradeTooLowException();
-	}
-	
+	AForm::execute(executor);
+	std::cout << "* GRRRRRRRR BRRRRRRR GRRRGRR BZZZZZZZZZZZZ *" << std::endl;
+
+	if (std::rand() % 2)
+		std::cout << this->getTarget() << " has been robotomized." << std::endl;
+	else
+		std::cout << "Robotomy failed, " << this->getTarget() << " couldn't robotomized." << std::endl;
 }

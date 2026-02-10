@@ -6,11 +6,13 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:01:09 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 13:38:52 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/10 15:52:42 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include <iostream>
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery Creation Form", 145, 137, "none")
 {
@@ -33,11 +35,41 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 }
 
+/*
+          &&& &&  & &&
+      && &\/&\|& ()|/ @, &&
+      &\/(/&/&||/& /_/)_&/_&
+   &() &\/&|()|/&\/ '%" & ()
+  &_\_&&_\ |& |&&/&__%_/_& &&
+&&   && & &| &| /& & % ()& /&&
+ ()&_---()&\&\|&&-&&--%---()~
+     &&     \|||
+             |||
+             |||
+             |||
+       , -=-~  .-^- _
+*/
+
 void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const
 {
-	if (this->getGradeToExec() < executor.getGrade())
+	AForm::execute(executor);
+
+	std::ofstream	ofile((this->getTarget() + "_shrubbery").c_str());
+	if (!ofile.good())
 	{
-		throw AForm::GradeTooLowException();
+		std::cout << "Error\nCouldn't create file" << std::endl;
+		return ;
 	}
-	// std::cout << this->getTarget() << " has been pardoned by President Zaphod Beeblebrox." << std::endl;
+	ofile << "          &&& &&  & &&\n";
+	ofile << "      && &\\/&\\|& ()|/ @, &&\n";
+	ofile << "      &\\/(/&/&||/& /_/)_&/_&\n";
+	ofile << "   &() &\\/&|()|/&\\/ '%\" & ()\n";
+	ofile << "  &_\\_&&_\\ |& |&&/&__%_/_& &&\n";
+	ofile << "&&   && & &| &| /& & % ()& /&&\n";
+	ofile << " ()&_---()&\\&\\|&&-&&--%---()~\n";
+	ofile << "     &&     \\|||\n";
+	ofile << "             |||\n";
+	ofile << "             |||\n";
+	ofile << "             |||\n";
+	ofile << "       , -=-~  .-^- _\n";
 }
