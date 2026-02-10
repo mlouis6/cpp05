@@ -6,12 +6,12 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:03:22 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 10:37:32 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/10 13:36:59 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat() : m_name("unnamed"), m_grade(150)
@@ -79,15 +79,27 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Grade too high");
 }
-void	Bureaucrat::signForm(Form& form) const
+void	Bureaucrat::signForm(AForm& form) const
 {
 	try
 	{
 		form.beSigned(*this);
 		std::cout << m_name << " signed " << form.getName() << std::endl;
 	}
-	catch (const Form::GradeTooLowException& e)
+	catch (const AForm::GradeTooLowException& e)
 	{
 		std::cout << m_name << " couldn't sign " << form.getName() << " because " << e.what() << "." << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(const AForm& form) const
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch (const AForm::GradeException& e)
+	{
+		std::cout << m_name << " couldn't execute " << form.getName() << " because " << e.what() << "." << std::endl;
 	}
 }

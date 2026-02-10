@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 13:03:18 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 10:39:43 by mlouis           ###   ########.fr       */
+/*   Created: 2026/02/08 15:29:07 by mlouis            #+#    #+#             */
+/*   Updated: 2026/02/10 10:42:09 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 # include <string>
-# include <iosfwd>
 # include <exception>
+# include "Bureaucrat.hpp"
 
-class Bureaucrat
+class AForm
 {
 	public:
-		Bureaucrat();
-		Bureaucrat(const std::string& name, int	grade);
-		Bureaucrat(const Bureaucrat& cpy);
-		~Bureaucrat();
+		AForm();
+		AForm(const std::string& name, int to_sign, int to_exec, const std::string& target);
+		AForm(const AForm& cpy);
+		virtual ~AForm();
 
 		const std::string&	getName() const;
-		int					getGrade() const;
-		Bureaucrat&			operator++();
-		Bureaucrat&			operator--();
+		bool				getIsSigned() const;
+		const std::string&	getTarget() const;
+		int					getGradeToExec() const;
 
 		class GradeException : public std::exception
 		{};
@@ -43,12 +43,16 @@ class Bureaucrat
 				virtual const char* what() const throw();
 		};
 
+		void			beSigned(const Bureaucrat& b);
+		virtual void	execute(const Bureaucrat& executor) const;
+
 	private:
 		const std::string	m_name;
-		int					m_grade;
-		Bureaucrat&	operator=(const Bureaucrat& cpy);
+		const std::string	m_target;
+		bool				m_isSigned;
+		const int			m_gradeToSign;
+		const int			m_gradeToExec;
+		AForm&	operator=(const AForm& cpy);
 };
-
-std::ostream&	operator<<(std::ostream& os, const Bureaucrat& b); 
 
 #endif

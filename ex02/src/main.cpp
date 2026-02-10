@@ -6,45 +6,53 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:02:24 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 11:16:14 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/10 13:56:08 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include <iostream>
 
 int	main()
 {
+	AForm *ppfJean;
 	try
 	{
-		Form badForm("bad", 0, 15);
+		ppfJean = new PresidentialPardonForm("Jean");
+
+		Bureaucrat bob("Bob", 5);
+		bob.signForm(*ppfJean);
+		bob.executeForm(*ppfJean);
+
+		std::cout << std::endl;
+		Bureaucrat ann("Ann", 25);
+		ann.signForm(*ppfJean);
+		ann.executeForm(*ppfJean);
+
+		std::cout << std::endl;
+		Bureaucrat jim("Jim", 26);
+		jim.signForm(*ppfJean);
+		jim.executeForm(*ppfJean);
 	}
-	catch (const Form::GradeException& e)
+	catch (const std::bad_alloc& e)
+	{
+		std::cout << "Error: " << e.what() << std::endl;
+		return (1);
+	}
+	catch (const AForm::GradeException& e)
 	{
 		std::cout << "Error form: " << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat bob("Bob", 15);
-		Form bunny("bunny", 18, 15);
-		bob.signForm(bunny);
-		
-		Form tiger("tiger", 14, 1);
-		bob.signForm(tiger);
-
-		Form monkey("monkey", 15, 15);
-		bob.signForm(monkey);
-
 	}
 	catch (const Bureaucrat::GradeException& e)
 	{
 		std::cout << "Error bureaucrat: " << e.what() << std::endl;
 	}
-	catch (const Form::GradeException& e)
-	{
-		std::cout << "Error form: " << e.what() << std::endl;
-	}
+	
+	delete ppfJean;
 	
 	return (0);
 }

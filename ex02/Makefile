@@ -6,7 +6,7 @@
 #    By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 13:03:16 by mlouis            #+#    #+#              #
-#    Updated: 2026/02/10 09:19:49 by mlouis           ###   ########.fr        #
+#    Updated: 2026/02/10 13:53:51 by mlouis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,25 @@
 
 NAME := except.out
 
-SRCS := Bureaucrat.cpp Form.cpp main.cpp
-INCS := .
-OBJS := $(SRCS:%.cpp=%.o)
-DEPS := $(OBJS:.o=.d)
+CL_DIR := class/
+SRCS_DIR := src/
+OBJS_DIR := .build/
+
+BUREAUCRAT_DIR := $(addprefix $(CL_DIR), bureaucrat/)
+BUREAUCRAT_CL := Bureaucrat.cpp
+
+FORM_DIR := $(addprefix $(CL_DIR), form/)
+FORM_CL := AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+
+P_BUREAUCRAT := $(addprefix $(BUREAUCRAT_DIR), $(BUREAUCRAT_CL))
+P_FORM := $(addprefix $(FORM_DIR), $(FORM_CL))
+
+P_MAIN := $(addprefix $(SRCS_DIR), main.cpp)
+
+SRCS := $(P_BUREAUCRAT) $(P_FORM) $(P_MAIN)
+INCS := $(BUREAUCRAT_DIR) $(FORM_DIR)
+OBJS := $(addprefix $(OBJS_DIR), $(SRCS:%.cpp=%.o))
+DEPS := $(addprefix $(OBJS_DIR), $(OBJS:.o=.d))
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
@@ -29,16 +44,17 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
-%.o: %.cpp
+$(OBJS_DIR)%.o: %.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 -include $(DEPS)
 
 clean:
-	rm -rf $(OBJS) $(DEPS)
+	rm -rf $(OBJS_DIR)
 
 fclean:
-	rm -rf $(OBJS) $(DEPS)
+	rm -rf $(OBJS_DIR)
 	rm -f $(NAME)
 
 re: fclean

@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:02:24 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/08 14:15:21 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/10 10:40:14 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main()
 		--b;
 		std::cout << b << std::endl;
 	}
-	catch (const std::exception& e)
+	catch (const Bureaucrat::GradeException& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -42,7 +42,7 @@ int	main()
 		--b;
 		std::cout << b << std::endl;
 	}
-	catch (const std::exception& e)
+	catch (const Bureaucrat::GradeException& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -53,7 +53,7 @@ int	main()
 		Bureaucrat b("Diane", 0);
 		std::cout << b << std::endl;
 	}
-	catch (const std::exception& e)
+	catch (const Bureaucrat::GradeException& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -64,7 +64,7 @@ int	main()
 		Bureaucrat b("Quentin", 151);
 		std::cout << b << std::endl;
 	}
-	catch (const std::exception& e)
+	catch (const Bureaucrat::GradeException& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
