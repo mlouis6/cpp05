@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 15:29:01 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 15:05:40 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/11 10:14:43 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	AForm::beSigned(const Bureaucrat& b)
 	m_isSigned = true;
 }
 
-void	AForm::execute(const Bureaucrat& executor) const
+void	AForm::gradeChecker(const Bureaucrat& b) const
 {
-	if (m_gradeToExec < executor.getGrade())
+	if (m_gradeToExec < b.getGrade())
 	{
 		throw AForm::GradeTooLowException();
 	}

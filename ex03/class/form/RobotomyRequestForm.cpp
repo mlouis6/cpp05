@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:01:29 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 15:30:13 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/11 10:13:05 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void	RobotomyRequestForm::execute(const Bureaucrat& executor) const
 {
-	AForm::execute(executor);
+	AForm::gradeChecker(executor);
 	std::cout << "* GRRRRRRRR BRRRRRRR GRRRGRR BZZZZZZZZZZZZ *" << std::endl;
 
 	if (std::rand() % 2)

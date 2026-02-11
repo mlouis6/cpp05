@@ -44,7 +44,9 @@ class AForm
 		};
 
 		void			beSigned(const Bureaucrat& b);
-		virtual void	execute(const Bureaucrat& executor) const;
+		void			gradeChecker(const Bureaucrat& b) const;
+		virtual void	execute(const Bureaucrat& executor) const = 0;
+
 
 	private:
 		const std::string	m_name;
