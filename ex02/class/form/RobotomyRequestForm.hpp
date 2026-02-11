@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:05:37 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 13:38:17 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/11 10:01:17 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ class RobotomyRequestForm : public AForm
 		virtual ~RobotomyRequestForm();
 
 		virtual void	execute(const Bureaucrat& executor) const;
+
+	private:
+		RobotomyRequestForm&	operator=(const RobotomyRequestForm& cpy);
 };
 
 #endif

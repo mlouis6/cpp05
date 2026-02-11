@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:01:59 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/10 13:37:52 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/11 10:01:08 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ class PresidentialPardonForm : public AForm
 		virtual ~PresidentialPardonForm();
 
 		virtual void	execute(const Bureaucrat& executor) const;
+
+	private:
+		PresidentialPardonForm&	operator=(const PresidentialPardonForm& cpy);
 };
 
 #endif
